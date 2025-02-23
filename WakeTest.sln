@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeTest.API", "WakeTest.API\WakeTest.API.csproj", "{74F628EB-76A7-4728-A81E-CCF1C3448A2D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7155835D-C010-4D47-B867-FCA6FA049269} = {7155835D-C010-4D47-B867-FCA6FA049269}
+		{E20474EA-2A61-4878-8E25-FF793019B4FD} = {E20474EA-2A61-4878-8E25-FF793019B4FD}
+		{E875620A-FA4E-4674-BC10-4F94FC3D807C} = {E875620A-FA4E-4674-BC10-4F94FC3D807C}
+		{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B} = {EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98531232-BD16-46AE-BDEA-98FB4CBD289C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8DC11708-A3BE-453F-A148-9A326AD333D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeTest.UnitTests", "WakeTest.UnitTests\WakeTest.UnitTests.csproj", "{E20474EA-2A61-4878-8E25-FF793019B4FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeTest.Domain", "WakeTest.Domain\WakeTest.Domain.csproj", "{E875620A-FA4E-4674-BC10-4F94FC3D807C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeTest.Infrastructure", "WakeTest.Infrastructure\WakeTest.Infrastructure.csproj", "{7155835D-C010-4D47-B867-FCA6FA049269}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeTest.Application", "WakeTest.Application\WakeTest.Application.csproj", "{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74F628EB-76A7-4728-A81E-CCF1C3448A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F628EB-76A7-4728-A81E-CCF1C3448A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F628EB-76A7-4728-A81E-CCF1C3448A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F628EB-76A7-4728-A81E-CCF1C3448A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20474EA-2A61-4878-8E25-FF793019B4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20474EA-2A61-4878-8E25-FF793019B4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20474EA-2A61-4878-8E25-FF793019B4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20474EA-2A61-4878-8E25-FF793019B4FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E875620A-FA4E-4674-BC10-4F94FC3D807C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E875620A-FA4E-4674-BC10-4F94FC3D807C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E875620A-FA4E-4674-BC10-4F94FC3D807C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E875620A-FA4E-4674-BC10-4F94FC3D807C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7155835D-C010-4D47-B867-FCA6FA049269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7155835D-C010-4D47-B867-FCA6FA049269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7155835D-C010-4D47-B867-FCA6FA049269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7155835D-C010-4D47-B867-FCA6FA049269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74F628EB-76A7-4728-A81E-CCF1C3448A2D} = {98531232-BD16-46AE-BDEA-98FB4CBD289C}
+		{E20474EA-2A61-4878-8E25-FF793019B4FD} = {8DC11708-A3BE-453F-A148-9A326AD333D6}
+		{E875620A-FA4E-4674-BC10-4F94FC3D807C} = {98531232-BD16-46AE-BDEA-98FB4CBD289C}
+		{7155835D-C010-4D47-B867-FCA6FA049269} = {98531232-BD16-46AE-BDEA-98FB4CBD289C}
+		{EDA4A8A7-7F62-40A3-BF8D-78AAEA325A1B} = {98531232-BD16-46AE-BDEA-98FB4CBD289C}
+	EndGlobalSection
+EndGlobal
