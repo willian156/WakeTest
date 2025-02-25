@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WakeTest.Application\WakeTest.Application.csproj" />
-    <ProjectReference Include="..\WakeTest.Domain\WakeTest.Domain.csproj" />
-    <ProjectReference Include="..\WakeTest.Infrastructure\WakeTest.Infrastructure.csproj" />
     <ProjectReference Include="..\WakeTest.API\WakeTest.API.csproj" />
   </ItemGroup>
 
