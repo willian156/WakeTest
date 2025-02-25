@@ -18,11 +18,11 @@ namespace WakeTest.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly DataContext _context;
+        
         private readonly IProductService _productService;
-        public ProductsController(DataContext context, IProductService productService)
+        public ProductsController(IProductService productService)
         {
-            _context = context;
+
             _productService = productService;
         }
 
@@ -34,7 +34,7 @@ namespace WakeTest.API.Controllers
             {
                 var products = _productService.GetProducts();
 
-                return products;
+                return Ok(products);
             }
             catch(Exception ex)
             {
@@ -73,9 +73,9 @@ namespace WakeTest.API.Controllers
                 var oldProduct = _productService.GetProductById(id).Result;
 
 
-                if (id != oldProduct.Id)
+                if (oldProduct == null)
                 {
-                    return BadRequest("URL's Id and body object Id doesn't match!");
+                    return NotFound(new { message = "Product not found!" });
                 }
 
                 var updatedProduct = await _productService.UpdateProduct(id, product);
@@ -112,12 +112,7 @@ namespace WakeTest.API.Controllers
                         return CreatedAtAction(nameof(GetProduct), new { id = post.Id }, post);
                     }
                 }
-                else
-                {
-                    return BadRequest(new { message = "Product doesn't saved!" });
-                }
-
-                return BadRequest(new {message = new Exception().Message});
+                return BadRequest(new { message = "Product doesn't saved!" });
             }
             catch (Exception ex)
             {
@@ -132,7 +127,7 @@ namespace WakeTest.API.Controllers
         {
             try
             {
-                var delProduct = _productService.DeleteProduct(id);
+                var delProduct = await _productService.DeleteProduct(id);
 
                 if (delProduct == null)
                 {
