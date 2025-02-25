@@ -155,5 +155,10 @@ namespace WakeTest.API.Controllers
             }
         }
 
+        private void TestFunc()
+        {
+            var rnd = new Random();
+        }
+
     }
 }
