@@ -27,10 +27,14 @@ namespace WakeTest.Application.Services
 
         public async Task<ProductDTO> GetProductById(int id)
         {
-            var product = await _context.Products.FindAsync(id);
 
-            var dtoProduct = new ProductDTO(product);
-            return dtoProduct;
+            var product = await _context.Products.FindAsync(id);
+            if(product != null)
+            {
+                var dtoProduct = new ProductDTO(product);
+                return dtoProduct;
+            }
+            return null;
         }
 
         public async Task<ProductDTO?> UpdateProduct(int id, UpdateProductDTO product) 
