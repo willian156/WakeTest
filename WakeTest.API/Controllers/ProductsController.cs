@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WakeTest.Domain.Entities;
-using WakeTest.Infrastructure.Repositories;
-using WakeTest.Application.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 using WakeTest.Application.Interfaces;
 using WakeTest.Application.DTOs.ProductDTO;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WakeTest.API.Controllers
 {

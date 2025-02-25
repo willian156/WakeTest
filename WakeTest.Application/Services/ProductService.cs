@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using WakeTest.Application.DTOs.ProductDTO;
 using WakeTest.Application.Interfaces;
 using WakeTest.Domain.Entities;
