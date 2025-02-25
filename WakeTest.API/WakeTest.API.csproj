@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WakeTest.Application\WakeTest.Application.csproj" />
-    <ProjectReference Include="..\WakeTest.Infrastructure\WakeTest.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
