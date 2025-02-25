@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WakeTest.Application.DTOs.ProductDTO;
@@ -19,10 +20,25 @@ namespace WakeTest.Application.Services
             _context = context;
         }
 
-        public List<ProductDTO> GetProducts()
+        public List<ProductDTO> GetProducts(string sortBy, string order)
         {
-            var products = _context.Products.Select(prod => new ProductDTO(prod)).ToList();
-            return products;
+            var query = _context.Products.AsQueryable();
+
+            sortBy = sortBy.ToLower();
+            sortBy = char.ToUpper(sortBy[0]) + sortBy.Substring(1);
+
+            order = order.ToLower();
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                var property = typeof(Product).GetProperty(sortBy, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                if (property != null)
+                {
+                    query = order == "desc" ? query.OrderByDescending(e => EF.Property<object>(e, sortBy)) : query.OrderBy(e => EF.Property<object>(e, sortBy));
+                }
+            }
+            var list = query.Select(prod => new ProductDTO(prod)).ToList();
+            return list;
         }
 
         public async Task<ProductDTO> GetProductById(int id)
@@ -30,6 +46,18 @@ namespace WakeTest.Application.Services
 
             var product = await _context.Products.FindAsync(id);
             if(product != null)
+            {
+                var dtoProduct = new ProductDTO(product);
+                return dtoProduct;
+            }
+            return null;
+        }
+
+        public async Task<ProductDTO> GetProductByName(string name)
+        {
+
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.Name == name);
+            if (product != null)
             {
                 var dtoProduct = new ProductDTO(product);
                 return dtoProduct;

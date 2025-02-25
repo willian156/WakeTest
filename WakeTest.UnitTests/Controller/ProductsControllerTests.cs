@@ -21,10 +21,12 @@ namespace WakeTest.UnitTests.Controller
             _productService = A.Fake<IProductService>();
         }
 
-
+        //GetProducts
         [Fact]
         public async Task ProductController_GetProducts_ReturnsOk()
         {
+            string inputSortBy = "Name";
+            string inputOrder = "asc";
             //arrange
             var fakeProducts = new List<ProductDTO>
                 {
@@ -35,7 +37,7 @@ namespace WakeTest.UnitTests.Controller
                     new ProductDTO{ Id = 5 , Name = "Produto Fake 5", Stock = 1004 , Value = (float)2.03}
                 };
 
-            A.CallTo(() => _productService.GetProducts()).Returns(fakeProducts);
+            A.CallTo(() => _productService.GetProducts(inputSortBy, inputOrder)).Returns(fakeProducts);
 
             var controller = new ProductsController(_productService);
 
@@ -50,7 +52,7 @@ namespace WakeTest.UnitTests.Controller
 
         }
 
-
+        //GetProduct
         [Fact]
         public async Task ProductController_GetProduct_ReturnsOk()
         {
@@ -93,13 +95,56 @@ namespace WakeTest.UnitTests.Controller
             notFoundResult.Value.Should().BeEquivalentTo(new { message = "Product not found!" });
         }
 
+        //GetProduct By Name
+        [Fact]
+        public async Task ProductController_GetProductByName_ReturnsOk()
+        {
+            //arrange
+            var inputProductName = "Produto 1";
+            var fakeProduct = new ProductDTO { Id = 1, Name = "Produto 1", Stock = 1000, Value = (float)1.99 };
 
+            A.CallTo(() => _productService.GetProductByName(inputProductName)).Returns(fakeProduct);
+
+            var controller = new ProductsController(_productService);
+
+            //act
+            var result = await controller.GetProduct(inputProductName);
+
+            //assert
+            result.Result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result.Result as OkObjectResult;
+            okResult.Value.Should().BeEquivalentTo(fakeProduct);
+        }
+
+        
+        [Fact]
+        public async Task ProductController_GetProductByName_ReturnsNotFound_WhenProductDoesNotExist()
+        {
+            //arrange
+            var nonExistentProductName = "Produto 1";
+
+            A.CallTo(() => _productService.GetProductByName(nonExistentProductName)).Returns(Task.FromResult<ProductDTO>(null));
+
+            var controller = new ProductsController(_productService);
+
+            //act
+            var result = await controller.GetProduct(nonExistentProductName);
+
+            //assert
+            result.Result.Should().BeOfType<NotFoundObjectResult>();
+
+            var notFoundResult = result.Result as NotFoundObjectResult;
+            notFoundResult.Value.Should().BeEquivalentTo(new { message = "Product not found!" });
+        }
+
+        //PutProduct
         [Fact]
         public async Task ProductController_PutProduct_ReturnsOk()
         {
             //arrange
-            int InputProductId = 1;
-            var InputUpdateProduct = new UpdateProductDTO
+            int inputProductId = 1;
+            var inputUpdateProduct = new UpdateProductDTO
             {
                 Name = "Produto Fake Atualizado 1",
                 Stock = 1010,
@@ -122,13 +167,13 @@ namespace WakeTest.UnitTests.Controller
                 Value = (float)3.99
             };
 
-            A.CallTo(() => _productService.GetProductById(InputProductId)).Returns(oldProduct);
-            A.CallTo(() => _productService.UpdateProduct(InputProductId, InputUpdateProduct)).Returns(updatedProduct);
+            A.CallTo(() => _productService.GetProductById(inputProductId)).Returns(oldProduct);
+            A.CallTo(() => _productService.UpdateProduct(inputProductId, inputUpdateProduct)).Returns(updatedProduct);
 
             var controller = new ProductsController(_productService);
 
             //act
-            var result = controller.PutProduct(InputProductId, InputUpdateProduct);
+            var result = controller.PutProduct(inputProductId, inputUpdateProduct);
 
             //assert
             result.Result.Should().BeOfType<OkObjectResult>();
@@ -142,7 +187,7 @@ namespace WakeTest.UnitTests.Controller
         {
             //arrange
             int notFoundInputProductId = 99;
-            var InputUpdateProduct = new UpdateProductDTO
+            var inputUpdateProduct = new UpdateProductDTO
             {
                 Name = "Produto Fake Atualizado 1",
                 Stock = 1010,
@@ -160,12 +205,12 @@ namespace WakeTest.UnitTests.Controller
             
 
             A.CallTo(() => _productService.GetProductById(notFoundInputProductId)).Returns(oldProduct);
-            A.CallTo(() => _productService.UpdateProduct(notFoundInputProductId, InputUpdateProduct)).Returns(Task.FromResult<ProductDTO>(null));
+            A.CallTo(() => _productService.UpdateProduct(notFoundInputProductId, inputUpdateProduct)).Returns(Task.FromResult<ProductDTO>(null));
 
             var controller = new ProductsController(_productService);
 
             //act
-            var result = controller.PutProduct(notFoundInputProductId, InputUpdateProduct);
+            var result = controller.PutProduct(notFoundInputProductId, inputUpdateProduct);
 
             //assert
             result.Result.Should().BeOfType<NotFoundObjectResult>();
@@ -179,7 +224,7 @@ namespace WakeTest.UnitTests.Controller
         {
             //arrange
             int notFoundInputProductId = 99;
-            var InputUpdateProduct = new UpdateProductDTO
+            var inputUpdateProduct = new UpdateProductDTO
             {
                 Name = "Produto Fake Atualizado 1",
                 Stock = 1010,
@@ -191,7 +236,7 @@ namespace WakeTest.UnitTests.Controller
             var controller = new ProductsController(_productService);
 
             //act
-            var result = controller.PutProduct(notFoundInputProductId, InputUpdateProduct);
+            var result = controller.PutProduct(notFoundInputProductId, inputUpdateProduct);
 
             //assert
             result.Result.Should().BeOfType<NotFoundObjectResult>();
@@ -200,6 +245,7 @@ namespace WakeTest.UnitTests.Controller
             notFoundResult.Value.Should().BeEquivalentTo(new { message = "Product not found!" });
         }
 
+        //PostProduct
         [Fact]
         public async Task ProductController_PostProduct_ReturnsCreatedAtAction()
         {
@@ -243,6 +289,7 @@ namespace WakeTest.UnitTests.Controller
             badRequest.Value.Should().BeEquivalentTo(new { message = "Product doesn't saved!" });
         }
 
+        //DeleteProduct
         [Fact]
         public async Task ProductController_DeleteProduct_ReturnsOk()
         {

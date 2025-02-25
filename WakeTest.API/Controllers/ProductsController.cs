@@ -28,11 +28,11 @@ namespace WakeTest.API.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts([FromQuery] string sortBy = "Name", [FromQuery] string order = "asc")
         {
             try
             {
-                var products = _productService.GetProducts();
+                var products = _productService.GetProducts(sortBy, order);
 
                 return Ok(products);
             }
@@ -49,6 +49,26 @@ namespace WakeTest.API.Controllers
             try
             {
                 var product = await _productService.GetProductById(id);
+
+                if (product == null)
+                {
+                    return NotFound(new { message = "Product not found!" });
+                }
+
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult<ProductDTO>> GetProduct(string name)
+        {
+            try
+            {
+                var product = await _productService.GetProductByName(name);
 
                 if (product == null)
                 {
