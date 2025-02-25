@@ -10,7 +10,7 @@ namespace WakeTest.Application.Interfaces
 {
     public interface IProductService
     {
-        List<ProductDTO> GetProducts();
+        List<ProductDTO> GetProducts(string sortBy, string order);
 
         Task<ProductDTO> GetProductById(int id);
 
@@ -18,6 +18,8 @@ namespace WakeTest.Application.Interfaces
 
         Task<ProductDTO?> PostProduct(PostProductDTO product);
 
-        Task<int?> DeleteProduct(int id);   
+        Task<int?> DeleteProduct(int id);
+
+        Task<ProductDTO> GetProductByName(string name);
     }
 }
